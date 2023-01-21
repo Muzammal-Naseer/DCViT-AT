@@ -1,1 +1,1 @@
-# Image Models with Dynamic Cues
+# Image Models with Temporal Tokes
