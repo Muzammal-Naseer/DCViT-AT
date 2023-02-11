@@ -1,0 +1,48 @@
+TRAIN:
+  ENABLE: True
+  DATASET: ucf101
+  BATCH_SIZE: 8
+  EVAL_PERIOD: 5
+  CHECKPOINT_PERIOD: 5
+  AUTO_RESUME: False
+  CHECKPOINT_FILE_PATH: '' 
+  FINETUNE: False
+DATA:
+  PATH_TO_DATA_DIR: /path/to/kinetics/
+  NUM_FRAMES: 16
+  SAMPLING_RATE: 32
+  TRAIN_JITTER_SCALES: [256,320]
+  TRAIN_CROP_SIZE: 224
+  TEST_CROP_SIZE: 224
+  INPUT_CHANNEL_NUM: [3]
+TIMESFORMER:
+  ATTENTION_TYPE: 'joint_space_time'
+SOLVER:
+  BASE_LR: 0.005
+  LR_POLICY: steps_with_relative_lrs
+  STEPS: [0, 11, 14]
+  LRS: [1, 0.1, 0.01]
+  MAX_EPOCH: 15
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  OPTIMIZING_METHOD: sgd
+MODEL:
+  MODEL_NAME: vit_base_patch16_224_timeP_1
+  # MODEL_NAME: view_token_vit_base_patch16_224
+  NUM_CLASSES: 101
+  ARCH: vit
+  LOSS_FUNC: cross_entropy
+  DROPOUT_RATE: 0.5
+TEST:
+  ENABLE: False
+  DATASET: ucf101
+  BATCH_SIZE: 8
+  NUM_ENSEMBLE_VIEWS: 1
+  NUM_SPATIAL_CROPS: 3
+DATA_LOADER:
+  NUM_WORKERS: 6
+  PIN_MEMORY: True
+NUM_GPUS: 8
+NUM_SHARDS: 1
+RNG_SEED: 0
+OUTPUT_DIR: train_output/time_on_image/ucf_on_imagenetVit_div_16frames
