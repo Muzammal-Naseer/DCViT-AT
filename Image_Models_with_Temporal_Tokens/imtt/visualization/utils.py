@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import torch
 from sklearn.metrics import confusion_matrix
 
-import timesformer.utils.logging as logging
-from timesformer.datasets.utils import pack_pathway_output, tensor_normalize
+import imtt.utils.logging as logging
+from imtt.datasets.utils import pack_pathway_output, tensor_normalize
 
 logger = logging.get_logger(__name__)
 
