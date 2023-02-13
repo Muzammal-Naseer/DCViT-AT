@@ -14,6 +14,27 @@
 
 ![demo](.github/demo.png)
 
+#
+<hr>
+
+## Main Message & Highlights
+
+
+1. The attacker does not need specialized architectures, \eg, divided space-time attention, 3D convolutions, or multi-view convolution networks for different data modalities. Image models are effective surrogates to optimize an adversarial attack to fool black-box models in a changing environment over time
+
+2. We introduce dynamic cues within frozen image models without losing the original image representation (e.g. generalization on ImageNet). Both image and video representations enhance adversarial transferability from our adapted image models.
+
+3. Our approach simply augments the existing adversarial attacks developed for image models to fool video or multi-view models.
+
+4. We analyze three types of training schemes (supervised, self-supervised, and text-supervised) and highlight new insights into the adversarial space of vision-language models.
+
+5. We further anlayze the textual bias within vision-language model, CLIP, for the low adversarial transferability to vision models.
+
+6. We observe highly transferable adversaial space of self-supervised vision transformer models such as DINO. 
+
+#
+<hr>
+
 ## Setup the environment
 ### Build the codebase and environment
 
