@@ -35,6 +35,32 @@
 #
 <hr>
 
+
+
+## What's New?
+
+### (January 21, 2023)
+* Our paper is accepted as a conference paper at [ICLR 2023](https://openreview.net/forum?id=SZynfVLGd5)
+
+
+### (February 15, 2023)
+* Pretrained weights released.
+  * Kinetics-400
+    * ```model_name``` - top-1 @ 224 @ 8
+  * HMDB
+   
+  * UCF
+   
+  * SSV2
+
+  * Shadow - ModelNet40
+  
+  * Depth - ModelNet40
+   
+<hr>
+
+
+
 ## Setup the environment
 ### Build the codebase and environment
 
