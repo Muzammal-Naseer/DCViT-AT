@@ -46,7 +46,7 @@
 3. [Training for Dynamic Cues for Videos](#Training-for-Dynamic-Cues-for-Videos)
 4. [Training for Dynamic Cues for Multi-Views-ModelNet40](#Training-for-Dynamic-Cues-for-Multi-Views-ModelNet40)
 5. [Evaluation](#Evaluation)
-6. [Attack Example-PDG](#Attack-Example-PDG)
+6. [Attack Image2Videos](#Attack-Image2Videos)
 7. [References](#References)
 
 <hr>
@@ -103,7 +103,7 @@
 
 <hr>
 
-## Attack Example-PDG
+## Attack Image2Videos
 
 <hr>
 
