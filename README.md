@@ -42,8 +42,8 @@
    * [Pre-trained Image Models-Supervised](#Pre-trained-Image-Models-Supervised)
    * [Pre-trained Image Models-Self Supervised](#Pre-trained-Image-Models-Self-Supervised)
    * [Pre-trained Image-Language Models-Text Supervised](#Pre-trained-Image-Language-Models-Text-Supervised)
-3. [Training for Dynamic Cues - Videos](#Training-for-Dynamic-Cues-Videos)
-4. [Training for Dynamic Cues - Multi-Views-ModelNet40](#Training-for-Dynamic-Cues-Multi-Views-ModelNet40)
+3. [Training for Dynamic Cues for Videos](#Training-for-Dynamic-Cues-for-Videos)
+4. [Training for Dynamic Cues for Multi-Views-ModelNet40](#Training-for-Dynamic-Cues-for-Multi-Views-ModelNet40)
 5. [Evaluation](#Evaluation)
 6. [Attack Example-PDG](#Attack-Example-PDG)
 7. [References](#References)
@@ -82,11 +82,11 @@
 
 <hr>
 
-## Training for Dynamic Cues - Videos
+## Training for Dynamic Cues for Videos
 
 <hr>
 
-## Training for Dynamic Cues - Multi-Views-ModelNet40
+## Training for Dynamic Cues for Multi-Views-ModelNet40
 
 <hr>
 
