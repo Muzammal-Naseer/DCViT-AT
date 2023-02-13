@@ -37,7 +37,7 @@
 
 ## Contents
 
-1. [What's New?](#What's-New?)
+1. [Whats' New?](#Whats'-New?)
 2. [Model Zoo](#Model-Zoo)
    * [Pre-trained Image Models-Supervied](#Pre-train-Image-Models-Supervied)
    * [Pre-trained Image Models-Self Supervied](#Pre-train-Image-Models-Self-Supervied)
@@ -50,7 +50,7 @@
 
 <hr>
 
-## What's New?
+## Whats' New?
 
 ### (January 21, 2023)
 * Our paper is accepted as a conference paper at [ICLR 2023](https://openreview.net/forum?id=SZynfVLGd5)
