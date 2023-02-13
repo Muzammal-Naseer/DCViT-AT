@@ -3,7 +3,7 @@
 [Muzammal Naseer](https://scholar.google.ch/citations?user=tM9xKA8AAAAJ&hl=en),
 [Ahmad Mahmood](https://www.linkedin.com/in/ahmad-mahmood-81339a212/),
 [Salman Khan](https://scholar.google.com/citations?user=M59O9lkAAAAJ&hl=en), &
-[Fahad Khan](https://scholar.google.ch/citations?user=zvaeYnUAAAAJ&hl=en&oi=ao),
+[Fahad Khan](https://scholar.google.ch/citations?user=zvaeYnUAAAAJ&hl=en&oi=ao)
 
 [Paper](https://openreview.net/forum?id=SZynfVLGd5) ([arxiv](soon)), [Reviews & Response](https://openreview.net/forum?id=SZynfVLGd5), [Video Presentation](soon), [Poster](soon)
 #
