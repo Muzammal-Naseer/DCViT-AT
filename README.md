@@ -76,9 +76,9 @@
 
 ### Pre-trained Image Models-Supervised
 
-### Pre-trained Image Models-Self Supervied
+### Pre-trained Image Models-Self Supervised
 
-### Pre-trained Image-Language Models-Text Supervied
+### Pre-trained Image-Language Models-Text Supervised
 
 <hr>
 
