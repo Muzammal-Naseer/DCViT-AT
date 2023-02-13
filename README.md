@@ -76,9 +76,9 @@
 
 ### Pre-trained Image Models-Supervised
 
-| Dataset       | Input Size | Model |                                                                                                       Pretrained Weights   |
+| Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    CIFAR10    |   32x32    |  ViT  | [Link](https://github.com/hananshafi/vits-for-small-scale-datasets/releases/download/v1.0/vit_cifar10_patch4_input32.pth)  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  ViT-Tiny  | [Link]()  |
 
 ### Pre-trained Image Models-Self Supervised
 
