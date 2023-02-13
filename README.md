@@ -37,7 +37,7 @@
 
 ## Contents
 
-1. [Whats' New?](#Whats'-New?)
+1. [News](#News)
 2. [Model Zoo](#Model-Zoo)
    * [Pre-trained Image Models-Supervied](#Pre-train-Image-Models-Supervied)
    * [Pre-trained Image Models-Self Supervied](#Pre-train-Image-Models-Self-Supervied)
