@@ -50,7 +50,7 @@
 
 <hr>
 
-## Whats' New?
+## News
 
 ### (January 21, 2023)
 * Our paper is accepted as a conference paper at [ICLR 2023](https://openreview.net/forum?id=SZynfVLGd5)
