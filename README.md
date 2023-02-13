@@ -38,6 +38,7 @@
 ## Contents
 
 1. [News](#News)
+2. [Setup](#Setup)
 2. [Model Zoo](#Model-Zoo)
    * [Pre-trained Image Models-Supervised](#Pre-trained-Image-Models-Supervised)
    * [Pre-trained Image Models-Self Supervised](#Pre-trained-Image-Models-Self-Supervised)
@@ -70,6 +71,10 @@
   
   * Depth - ModelNet40
    
+<hr>
+
+## Setup
+
 <hr>
 
 ## Model Zoo
