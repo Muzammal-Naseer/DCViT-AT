@@ -60,17 +60,41 @@
 ### (February 15, 2023)
 * Pretrained weights released.
   * Kinetics-400
-    * ```model_name``` - top-1 @ 224 @ 8
+    * ```DeiT-tiny``` - 44.6
+    * ```DeiT-small``` - 53.0
+    * ```DeiT-base``` - 57.0
+    * ```Dino``` - 57.4
+    * ```Clip``` - 67.3
   * HMDB
-   
+    * ```DeiT-tiny``` - 36.2
+    * ```DeiT-small``` - 44.6
+    * ```DeiT-base``` - 47.7
+    * ```Dino``` - 45.1
+    * ```Clip``` - 54.6
   * UCF
-   
+    * ```DeiT-tiny``` - 70.0
+    * ```DeiT-small``` - 77.2
+    * ```DeiT-base``` - 81.4
+    * ```Dino``` - 79.5
+    * ```Clip``` - 86.0
   * SSV2
-
+    * ```DeiT-tiny``` - 11.2
+    * ```DeiT-small``` - 15.3
+    * ```DeiT-base``` - 17.5
+    * ```Dino``` - 17.4
+    * ```Clip``` - 19.9
   * Shadow - ModelNet40
-  
+    * ```DeiT-tiny``` - 81.0
+    * ```DeiT-small``` - 86.2
+    * ```DeiT-base``` - 88.2
+    * ```Dino``` - 89.8
+    * ```Clip``` - 88.9
   * Depth - ModelNet40
-   
+    * ```DeiT-tiny``` - 86.0
+    * ```DeiT-small``` - 86.6
+    * ```DeiT-base``` - 90.1
+    * ```Dino``` - 90.1
+    * ```Clip``` - 89.5
 <hr>
 
 ## Setup
