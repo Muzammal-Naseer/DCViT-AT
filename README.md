@@ -107,11 +107,37 @@
 
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  ViT-Tiny  | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+
 
 ### Pre-trained Image Models-Self Supervised
 
+| Dataset       | Input Size | Model | Pretrained Weights   |
+|:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Dino | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
+
 ### Pre-trained Image-Language Models-Text Supervised
+
+| Dataset       | Input Size | Model | Pretrained Weights   |
+|:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Clip | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
 
 <hr>
 
