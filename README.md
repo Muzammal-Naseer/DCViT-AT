@@ -141,11 +141,73 @@
 
 <hr>
 
+## Setup the environment
+### Build the codebase and environment
+
+```
+git clone https://github.com/Muzammal-Naseer/DCViT-AT
+cd DCViT-AT
+conda env create -n [name] --file environment.yml
+conda activate [name]
+python setup.py build develop
+```
+## Dataset Preparation
+See details in md file
+
 ## Training for Dynamic Cues for Videos
+The folder [Dynamic_Cues](/Dynamic_Cues) contains all the code to train our models.
+
+Change the arguments in [train_video.sh](/Dynamic_Cues/train_scripts/train_video.sh) file to train different variations. We provide a sample script to train **DeiT-base** on **Ucf-101**:
+
+```
+python tools/run_net.py \
+  --cfg configs/Ucf101/8_224.yaml \
+  DATA.PATH_TO_DATA_DIR '/path/to/ucf/annotations' \
+  NUM_GPUS 2 \
+  TRAIN.BATCH_SIZE 16 \
+  MODEL.MODEL_NAME deit_base_patch16_224_timeP_1 \
+  MODEL.NUM_CLASSES 101 \
+  OUTPUT_DIR /path/to/save/model \
+  TRAIN.FINETUNE False \
+  SOLVER.BASE_LR 0.005 \
+  SOLVER.MAX_EPOCH 15 \
+  TRAIN.EVAL_PERIOD 5 \
+  DATA.NUM_FRAMES 8 \
+  SOLVER.STEPS '[0,11,14]' \
+  SOLVER.LRS '[1,0.1,0.01]' \
+  TRAIN.CHECKPOINT_PERIOD 15 \
+  DATA.TRAIN_JITTER_SCALES '[256,320]' \
+  DATA.TRAIN_CROP_SIZE 224
+```
 
 <hr>
 
 ## Training for Dynamic Cues for Multi-Views-ModelNet40
+
+The folder [Dynamic_Cues](/Dynamic_Cues) contains all the code to train our models.
+
+Change the arguments in [train_img3d.sh](/Dynamic_Cues/train_scripts/train_video.sh) file to train different variations. We provide a sample script to train **DeiT-base** on **Depth**:
+
+```
+python tools/run_net.py \
+  --cfg configs/Img3d/8_224.yaml \
+  DATA.PATH_TO_DATA_DIR '/root/Depth/*/' \ # path should end with '*' to read all classes
+  NUM_GPUS 2 \
+  TRAIN.BATCH_SIZE 16 \
+  MODEL.MODEL_NAME deit_base_patch16_224_timeP_1 \
+  MODEL.NUM_CLASSES 40 \
+  OUTPUT_DIR /path/to/save/model \
+  TRAIN.FINETUNE False \
+  SOLVER.BASE_LR 0.005 \
+  SOLVER.MAX_EPOCH 15 \
+  TRAIN.EVAL_PERIOD 5 \
+  DATA.NUM_FRAMES 16 \
+  SOLVER.STEPS '[0,11,14]' \
+  SOLVER.LRS '[1,0.1,0.01]' \
+  TRAIN.CHECKPOINT_PERIOD 15 \
+  DATA.TRAIN_JITTER_SCALES '[256,320]' \
+  DATA.TRAIN_CROP_SIZE 224
+```
 
 <hr>
 
@@ -160,21 +222,3 @@
 ## References
 
 <hr>
-
-## Setup the environment
-### Build the codebase and environment
-
-```
-git clone https://github.com/Muzammal-Naseer/Adversarial-Transferability-using-Dynamic-Cues
-cd Adversarial-Transferability-using-Dynamic-Cues
-conda env create -n [name] --file environment.yml
-conda activate [name]
-python setup.py build develop
-```
-## Dataset Preparation
-See details in md file
-
-## Training
-The folder [Image_Models_with_Temporal_Tokens](/Image_Models_with_Temporal_Tokens) contains all the code to train our models.
-
-Change the arguments in [train_net.sh](/Image_Models_with_Temporal_Tokens/train_net.sh) file to train different variations.
