@@ -213,6 +213,28 @@ python tools/run_net.py \
 
 ## Evaluation
 
+Change the arguments in [test_net.sh](/Dynamic_Cues/test_net.sh) file to train different variations. We provide a sample script to test **DeiT-base** on **Ucf-101**:
+
+```
+python tools/run_net.py \
+  --cfg configs/Ucf-101/8_224_TEST.yaml \
+  DATA.PATH_TO_DATA_DIR '/path/to/ucf/annotations' \
+  TRAIN.ENABLE False \
+  TEST.CHECKPOINT_FILE_PATH /path/to/saved/model \
+  MODEL.MODEL_NAME deit_base_patch16_224_timeP_1 \
+  TEST.SAVE_RESULTS_PATH /path/to/save/pkl/file \
+  DATA.TEST_CROP_SIZE 224 \
+  DATA.NUM_FRAMES 8 \
+  TEST.NUM_ENSEMBLE_VIEWS 3 \
+  NUM_GPUS 4 \
+  TEST.BATCH_SIZE 16 \
+  TEST.NUM_SPATIAL_CROPS 3
+```
+
+Get the top-1 and top-5 accuracies by running the command: 
+
+```python get_pickle_acc.py /path/to/saved/pkl/file```
+
 <hr>
 
 ## Attack Image2Videos
