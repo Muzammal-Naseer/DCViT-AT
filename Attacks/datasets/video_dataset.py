@@ -6,7 +6,7 @@ import torch
 import torch.utils.data
 from fvcore.common.file_io import PathManager
 
-import timesformer.utils.logging as logging
+import imtt.utils.logging as logging
 
 from . import decoder as decoder
 from . import utils as utils

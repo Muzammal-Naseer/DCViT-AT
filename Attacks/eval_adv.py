@@ -18,7 +18,6 @@ from pathways.attacks import Adv_Attack
 
 from pathways.clip_models.clip_utils import imagenet_classes, imagenet_templates
 from pathways.clip_models import clip
-from mvcnn.tools.ImgDataset import MultiviewImgDataset
 
 import pytorch_ssim
 import lpips
@@ -34,16 +33,12 @@ def parse_args():
     parser.add_argument('--test_dir', default='IN/val', help='ImageNet Validation Data Set')
     parser.add_argument('--image_list', default=None, help='Image List from Validation Data stored as json file in data folder')
     parser.add_argument('--data_type', default='IN', help='ImageNet, CIFAR10/100')
-    parser.add_argument('--src_model_1', type=str, default='deit_small_patch16_224', help='Source Model Name')
-    parser.add_argument('--src_model_2', type=str, default='deit_small_patch16_224', help='Source Model Name')
-    parser.add_argument('--src_model_3', type=str, default='deit_small_patch16_224', help='Source Model Name')
+    parser.add_argument('--src_model', type=str, default='deit_small_patch16_224', help='Source Model Name')
     parser.add_argument('--tar_model', type=str, default='deit_small_patch16_224', help='Source Model Name')
     parser.add_argument('--scale_size', type=int, default=256, help='')
     parser.add_argument('--img_size', type=int, default=224, help='')
     parser.add_argument('--batch_size', type=int, default=20, help='Batch Size')
-    parser.add_argument('--pre_trained_1', default=None, help='Load given model weights')
-    parser.add_argument('--pre_trained_2', default=None, help='Load given model weights')
-    parser.add_argument('--pre_trained_3', default=None, help='Load given model weights')
+    parser.add_argument('--pre_trained', default=None, help='Load given model weights')
     parser.add_argument('--tar_pre_trained', default=None, help='Load given model weights for target model')
 
     # Transformer specific parameters
@@ -65,7 +60,7 @@ def parse_args():
     parser.add_argument('--num_temporal_views', type=int, default=1, help='Number of temporal crops in a video')
     parser.add_argument('--video_sampling_rate', type=int, default=32, help='Sampling rate of a video')
     parser.add_argument('--num_gpus', type=int, default=1, help='Number of GPUs to use')
-    parser.add_argument('--num_workers', type=int, default=10, help='Number of workers to use')
+    parser.add_argument('--num_workers', type=int, default=6, help='Number of workers to use')
     parser.add_argument('--video_mean', type=list, default=([0.45, 0.45, 0.45]), help='Mean of video dataset')
     parser.add_argument('--video_std', type=list, default=([0.225, 0.225, 0.225]), help='Std of video dataset')
     parser.add_argument('--src_frames', type=int, default=1, help='Number of frames that src model takes')
@@ -76,8 +71,8 @@ def parse_args():
     parser.add_argument('--variation', type=str, default='', help='')
     parser.add_argument('--add_grad', type=bool, default=False, help='add gradient of middle frame to all frames; required when using cat prompt as src model')
     parser.add_argument('--prod_grad', type=bool, default=False, help='multiply gradient of middle frame to all frames; required when using cat prompt as src model')
+    parser.add_argument('--src_num_cls', type=int, default=400, help='')
     
-
     return parser.parse_args()
 
 def main():
@@ -89,10 +84,12 @@ def main():
     if args.attack_type in ['fgsm', 'rfgsm']:
         args.iters = 1 # single step attacks
 
+    print("pre_train: ", args.pre_trained)
+
     if args.variation == '':
-        args.dir = f"results_adv/{args.attack_type}/{args.src_model_3}_{args.index}_{args.data_type}/{args.tar_model}"
+        args.dir = f"results_adv/{args.attack_type}/{args.src_model}_{args.index}_{args.data_type}/{args.tar_model}"
     else:
-        args.dir = f"results_adv/{args.attack_type}/{args.src_model_3}_{args.index}_{args.variation}_{args.data_type}/{args.tar_model}"
+        args.dir = f"results_adv/{args.attack_type}/{args.src_model}_{args.index}_{args.variation}_{args.data_type}/{args.tar_model}"
     if not os.path.isdir(args.dir):
         os.makedirs(args.dir)
     json.dump(vars(args), open(f"{args.dir}/config.json", "w"), indent=4)
@@ -102,42 +99,32 @@ def main():
     if args.data_type in ['hmdb51', 'ucf101', 'kinetics', 'ssv2']:
         video_data = True
 
-    multi_data = False
-    if 'img3d' in args.data_type:
-        multi_data = True
-
     # GPU
     device1 = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     device2 = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
-    src_model_1, src_mean, src_std = get_model(args.src_model_1, args.num_classes, args, is_src=True)
-    src_model_2, src_mean, src_std = get_model(args.src_model_2, args.num_classes, args, is_src=True)
-    src_model_3, src_mean, src_std = get_model(args.src_model_3, args.num_classes, args, is_src=True)
+    src_model, src_mean, src_std = get_model(args.src_model, args.src_num_cls, args, is_src=True)
+    if args.num_gpus > 1:
+        src_model = src_model.module
     
     device = device1
-    src_model_1 = src_model_1.to(device).eval()
-    src_model_2 = src_model_2.to(device).eval()
-    src_model_3 = src_model_3.to(device).eval()
-    if args.pre_trained_1:
-        checkpoint_1 = torch.load(args.pre_trained_1)
-        checkpoint_2 = torch.load(args.pre_trained_2)
-        checkpoint_3 = torch.load(args.pre_trained_3)
-        if 'model' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['model'])
-            src_model_2.load_state_dict(checkpoint_2['model'])
-            src_model_3.load_state_dict(checkpoint_3['model'])
-        elif 'state_dict' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['state_dict'])
-            src_model_2.load_state_dict(checkpoint_2['state_dict'])
-            src_model_3.load_state_dict(checkpoint_3['state_dict'])
-        elif 'model_state' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['model_state'])
-            src_model_2.load_state_dict(checkpoint_2['model_state'])
-            src_model_3.load_state_dict(checkpoint_3['model_state'], strict=False)
-        else:
-            src_model_1.load_state_dict(checkpoint_1)
-            src_model_2.load_state_dict(checkpoint_2)
-            src_model_3.load_state_dict(checkpoint_3)
+    src_model = src_model.to(device).eval()
+
+    if args.pre_trained:
+        checkpoint = torch.load(args.pre_trained)
+            
+        if 'model' in checkpoint:
+            checkpoint = checkpoint['model']
+        elif 'state_dict' in checkpoint:
+            checkpoint = checkpoint['state_dict']
+        elif 'model_state' in checkpoint:
+            checkpoint = checkpoint['model_state']
+
+        if args.src_model == 'i3d':
+            # add model. in start of keys in checkpoint
+            checkpoint = {f"model.{k}": v for k, v in checkpoint.items()}
+
+        src_model.load_state_dict(checkpoint)
 
     tar_model, tar_mean, tar_std = get_model(args.tar_model, args.num_classes, args)
 
@@ -150,15 +137,20 @@ def main():
     if args.tar_pre_trained:
         checkpoint = torch.load(args.tar_pre_trained)
         if 'model' in checkpoint:
-            tar_model.load_state_dict(checkpoint['model'])
+            checkpoint = checkpoint['model']
         elif 'state_dict' in checkpoint:
-            tar_model.load_state_dict(checkpoint['state_dict'])
+            checkpoint = checkpoint['state_dict']
         elif 'model_state' in checkpoint:
-            tar_model.load_state_dict(checkpoint['model_state'])
-        else:
-            tar_model.load_state_dict(checkpoint)
+            checkpoint = checkpoint['model_state']
+        
+
+        if args.tar_model == 'i3d':
+            # add model. in start of keys in checkpoint
+            checkpoint = {f"model.{k}": v for k, v in checkpoint.items()}
+        
+        tar_model.load_state_dict(checkpoint)
     
-    if args.tar_model == 'resnet_50' or args.tar_model == 'mvcnn':
+    if args.tar_model == 'resnet_50':
         num_blocks = 1
     else:
         num_blocks = tar_model.depth
@@ -179,17 +171,12 @@ def main():
             return zeroshot_weights
 
         zeroshot_weights = zeroshot_classifier(imagenet_classes, imagenet_templates)
-    
-    if multi_data:
-        test_dataset = MultiviewImgDataset(args.test_dir, scale_aug=False, rot_aug=False, num_views=args.num_frames)
-        test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=0)
-        test_size = len(test_dataset)
-        print("SIZE:", test_size)
 
-    elif video_data:
+    if video_data:
+        print("Src",src_model.depth)
         test_loader, test_size = construct_loader(args)
 
-    # setup test_meter for video multiview testing
+        # setup test_meter for video multiview testing
         clean_test_meter = TestMeter(
             len(test_loader.dataset)
             // (args.num_temporal_views * args.num_spatial_crops),
@@ -198,7 +185,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         adv_test_meter = TestMeter(
             len(test_loader.dataset)
@@ -208,7 +195,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         fool_test_meter = CompareMeter(
             len(test_loader.dataset)
@@ -217,7 +204,7 @@ def main():
             args.num_classes,
             len(test_loader),
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         tar_test_meter = TestMeter(
             len(test_loader.dataset)
@@ -227,7 +214,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
 
     else:
@@ -262,7 +249,7 @@ def main():
             if args.num_div_gpus > 1:
                 device = device2
             img, label = image_label[0].to(device), image_label[1].to(device)
-
+        
             if video_data:
                 video_idx, meta = image_label[2].to(device), image_label[3]
                 for key, val in meta.items():
@@ -277,12 +264,7 @@ def main():
                 image_features /= image_features.norm(dim=-1, keepdim=True)
                 clean_out = 100. * image_features @ zeroshot_weights
             else:
-                if multi_data:
-                    N,V,C,H,W = img.shape
-                    img_v = img.view(-1,C,H,W).to(device)
-                    clean_out = tar_model(normalize(img_v.clone(), mean=tar_mean, std=tar_std))
-                else:
-                    clean_out = tar_model(normalize(img.clone(), mean=tar_mean, std=tar_std))
+                clean_out = tar_model(normalize(img.clone(), mean=tar_mean, std=tar_std))
 
                 if args.num_gpus > 1:
                     clean_out, label, video_idx = all_gather(
@@ -319,45 +301,19 @@ def main():
                 target = torch.LongTensor(img.size(0))
                 target.fill_(args.target_label)
                 target = target.to(device)
-           
+
             if args.num_div_gpus > 1:
                 img, label = img.to(device1), label.to(device1)
                 if target is not None:
                     target = target.to(device1)
-            
-            def forward_pass(input, return_tokens=True):
-                out_1, feat_1 = src_model_1(input, return_tokens=return_tokens)
-                out_2, feat_2 = src_model_2(input, return_tokens=return_tokens)
-                out_3, feat_3 = src_model_3(input, return_tokens=return_tokens)
-
-                out = [0,0]
-                feat = [0,0]
-                for i in range(2):
-                    out[i] = [o_1 + o_2 + o_3 for o_1, o_2, o_3 in zip(out_1[i], out_2[i], out_3[i])]
-                    feat[i] = [f_1 + f_2 + f_3 for f_1, f_2, f_3 in zip(feat_1[i], feat_2[i], feat_3[i])]
-
-                return tuple(out), tuple(feat)
-
-            if multi_data:
-                adv = Adv_Attack(args.attack_type)(forward_pass, src_mean, src_std, img.permute(0,2,1,3,4).to(device), label, target, args, True)
-            else:
-                adv = Adv_Attack(args.attack_type)(forward_pass, src_mean, src_std, img, label, target, args, video_data)
+            adv = Adv_Attack(args.attack_type)(src_model, src_mean, src_std, img, label, target, args, video_data)
 
             if 'clip' in args.tar_model:
                 image_features = tar_model.encode_image(normalize(adv.clone(), mean=src_mean, std=src_std))
                 image_features /= image_features.norm(dim=-1, keepdim=True)
                 adv_out = 100. * image_features @ zeroshot_weights
             else:
-                if multi_data:
-                    adv = adv.permute(0,2,1,3,4)
-                    N,V,C,H,W = adv.shape
-                    try:
-                        adv_v = adv.view(-1,C,H,W).to(device)
-                    except:
-                        adv_v = adv.reshape(-1,C,H,W).to(device)
-                    adv_out = tar_model(normalize(adv_v.clone(), mean=tar_mean, std=tar_std))
-                else:
-                    adv_out = tar_model(normalize(adv.clone(), mean=tar_mean, std=tar_std))
+                adv_out = tar_model(normalize(adv.clone(), mean=tar_mean, std=tar_std))
 
                 if args.num_gpus > 1:
                     adv_out, label, video_idx = all_gather(
@@ -403,9 +359,21 @@ def main():
                         target_acc[block] += torch.sum(adv_out[block].argmax(dim=-1) == target).item()
 
             distance+=(img-adv).max().item()*255
-            if not video_data and not multi_data:
+            if not video_data:
                 ssim_d += pytorch_ssim.ssim(img, adv).item()
                 lpips_d += loss_fn_alex((2*img-1),(2*adv-1)).view(-1,).mean().item()
+            else:
+                ssim_tmp = 0
+                lpips_tmp = 0
+                img_min = img.min()
+                img_max = img.max()
+                for num_frame in range(args.num_frames):
+                    adv_tmp = (adv[:,:,num_frame,:,:] - img_min) / (img_max - img_min)
+                    img_tmp = (img[:,:,num_frame,:,:] - img_min) / (img_max - img_min)
+                    ssim_tmp += pytorch_ssim.ssim(img_tmp, adv_tmp).item()
+                    lpips_tmp += loss_fn_alex((2*img_tmp-1),(2*adv_tmp-1)).view(-1,).mean().item()
+                ssim_d += ssim_tmp/args.num_frames
+                lpips_d += lpips_tmp/args.num_frames
 
             del clean_out, adv_out
 
@@ -450,6 +418,7 @@ def main():
                 target_acc[block] = round(target_acc[block] / test_size * 100, 3)
         target_acc['mean'] = round(np.array(list(target_acc.values())).mean(), 3)  # Average target accuracy across blocks
 
+    # print(stats_acc)
     json.dump({"Accuracy": acc,
                "Adv Accuracy": adv_acc,
                "Fool Rate": fool_rate,

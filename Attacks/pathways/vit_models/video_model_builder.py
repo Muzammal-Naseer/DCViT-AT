@@ -6,8 +6,8 @@ import math
 import torch
 import torch.nn as nn
 
-import timesformer.utils.weight_init_helper as init_helper
-from timesformer.models.batchnorm_helper import get_norm
+import imtt.utils.weight_init_helper as init_helper
+from imtt.models.batchnorm_helper import get_norm
 
 from . import head_helper, resnet_helper, stem_helper
 from .build import MODEL_REGISTRY
@@ -20,7 +20,7 @@ import copy
 
 
 import numpy as np
-# from timesformer.models.vit import vit_base_patch16_224
+# from imtt.models.vit import vit_base_patch16_224
 
 # Number of blocks for different stages given the model depth.
 _MODEL_STAGE_DEPTH = {50: (3, 4, 6, 3), 101: (3, 4, 23, 3)}

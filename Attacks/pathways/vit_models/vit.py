@@ -11,20 +11,15 @@ from timm.models.layers import trunc_normal_
 from timm.models.helpers import *
 from timm.models import create_model
 
-# from users.ahmad.ImgModelsToAll.pathways.vit_models.vit_utils import drop_path
 from .transformer_block import *
-from timesformer.utils.parser import load_config
+from imtt.utils.parser import load_config
 
 from .build import MODEL_REGISTRY
 from .prompt_models_196_cat_prompt import resPromptDino, resPromptClip
 from .prompt_models_196_cat_prompt_2 import resPromptDino2, resPromptClip2
 from .prompt_models_196_cat_prompt import resPromptVisionTransformer as catPromptVisionTransformer
 from .prompt_models_196_cat_prompt_2 import resPromptVisionTransformer as catPromptVisionTransformer2
-from .prompt_models_196_baseline import resPromptVisionTransformer as baselinePromptVisionTransformer
-from .prompt_models_196_baseline_linear import resPromptVisionTransformer as baselineLinearVisionTransformer
-from .prompt_models import resPromptVisionTransformer as fullPromptVisionTransformer
 from .vit_timesformer import VisionTransformer as TimesformerVisionTransformer
-# from .i3d import VisionTransformer as I3dVisionTransformer
 from .resnet import generate_model
 from .dino import DINOVisionTransformer
 from .clip_image import VisionTransformer as CLIPVisionTransformer
@@ -626,15 +621,6 @@ class vit_base_patch16_224_base_lin(nn.Module):
         else:
             return x_resPrompt
 
-# full 1568
-# @MODEL_REGISTRY.register()
-# class deit_base_patch16_224_timeP_1_full_1568(nn.Module):
-#     def __init__(self, args, **kwargs):
-#         super(deit_base_patch16_224_timeP_1_full_1568, self).__init__()
-#         self.pretrained=True
-#         patch_size = 16
-#         self.model = fullPromptVisionTransformer(img_size=args.img_size,num_classes=1000, actual_num_classes=args.num_classes, patch_size=patch_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-
-
 @MODEL_REGISTRY.register()
 class resnet_50(nn.Module):
     def __init__(self, args, **kwargs):
@@ -650,11 +636,6 @@ class resnet_50(nn.Module):
                         widen_factor=1.0,
                         )
 
-        # ckpt = torch.load("timesformer/models/pretrained/resnet-50-k400.pth")
-        # ## remove module from keys in state dict
-        # ckpt = ckpt['state_dict']
-        # ckpt = {k.replace('module.', ''): v for k, v in ckpt.items()}
-        # self.model.load_state_dict(ckpt, strict=False)
         self.depth = 1
         
     def forward(self, x, return_tokens=False):

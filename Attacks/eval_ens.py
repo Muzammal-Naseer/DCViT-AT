@@ -88,11 +88,6 @@ def main():
     if args.attack_type in ['fgsm', 'rfgsm']:
         args.iters = 1 # single step attacks
 
-    # print("pre_train: ", args.pre_trained)
-    # print(args.replicate_grad)
-    # print(args.no_sup_loss)
-    # print(args.no_unsup_loss)
-
     if args.variation == '':
         args.dir = f"results_adv/{args.attack_type}/{args.src_model_3}_{args.index}_{args.data_type}/{args.tar_model}"
     else:
@@ -114,11 +109,7 @@ def main():
     src_model_2, src_mean, src_std = get_model(args.src_model_2, args.num_classes, args, is_src=True)
     src_model_3, src_mean, src_std = get_model(args.src_model_3, args.num_classes, args, is_src=True)
 
-    # if args.num_gpus > 1:
-    #     src_model = src_model.module
-    
     device = device1
-    # src_model = src_model.to(device).eval()
     src_model_1 = src_model_1.to(device).eval()
     src_model_2 = src_model_2.to(device).eval()
     src_model_3 = src_model_3.to(device).eval()
@@ -312,8 +303,7 @@ def main():
                 target = torch.LongTensor(img.size(0))
                 target.fill_(args.target_label)
                 target = target.to(device)
-            # if idx == 0:
-            #     vutils.save_image(vutils.make_grid(img[:,:,0,:,:], normalize=True, scale_each=True), f'org.png')
+            
             if args.num_div_gpus > 1:
                 img, label = img.to(device1), label.to(device1)
                 if target is not None:
@@ -334,9 +324,6 @@ def main():
 
 
             adv = Adv_Attack(args.attack_type)(forward_pass, src_mean, src_std, img, label, target, args, video_data)
-            # if idx == 0:
-            #     vutils.save_image(vutils.make_grid(adv[:,:,0,:,:], normalize=True, scale_each=True), f'adv.png')
-            #     break
 
             if 'clip' in args.tar_model:
                 image_features = tar_model.encode_image(normalize(adv.clone(), mean=src_mean, std=src_std))
@@ -393,14 +380,6 @@ def main():
                 ssim_d += pytorch_ssim.ssim(img, adv).item()
                 lpips_d += loss_fn_alex((2*img-1),(2*adv-1)).view(-1,).mean().item()
 
-            if idx==1:
-                if not video_data:
-                    vutils.save_image(vutils.make_grid(adv, normalize=True, scale_each=True), f'{args.dir}/adv.png')
-                else: 
-                    print(adv.shape, img.shape)
-                    vutils.save_image(vutils.make_grid(adv[:,:,4,:,:], normalize=True, scale_each=True), f'{args.dir}/adv.png')
-                    vutils.save_image(vutils.make_grid(img[:,:,4,:,:], normalize=True, scale_each=True), f'{args.dir}/org.png')
-                
             del clean_out, adv_out
 
     distance = distance/(idx+1)

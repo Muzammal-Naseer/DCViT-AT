@@ -11,3 +11,6 @@ python tools/run_net.py \
   NUM_GPUS 4 \
   TEST.BATCH_SIZE 16 \
   TEST.NUM_SPATIAL_CROPS 3
+
+
+  

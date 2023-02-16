@@ -34,16 +34,12 @@ def parse_args():
     parser.add_argument('--test_dir', default='IN/val', help='ImageNet Validation Data Set')
     parser.add_argument('--image_list', default=None, help='Image List from Validation Data stored as json file in data folder')
     parser.add_argument('--data_type', default='IN', help='ImageNet, CIFAR10/100')
-    parser.add_argument('--src_model_1', type=str, default='deit_small_patch16_224', help='Source Model Name')
-    parser.add_argument('--src_model_2', type=str, default='deit_small_patch16_224', help='Source Model Name')
-    parser.add_argument('--src_model_3', type=str, default='deit_small_patch16_224', help='Source Model Name')
+    parser.add_argument('--src_model', type=str, default='deit_small_patch16_224', help='Source Model Name')
     parser.add_argument('--tar_model', type=str, default='deit_small_patch16_224', help='Source Model Name')
     parser.add_argument('--scale_size', type=int, default=256, help='')
     parser.add_argument('--img_size', type=int, default=224, help='')
     parser.add_argument('--batch_size', type=int, default=20, help='Batch Size')
-    parser.add_argument('--pre_trained_1', default=None, help='Load given model weights')
-    parser.add_argument('--pre_trained_2', default=None, help='Load given model weights')
-    parser.add_argument('--pre_trained_3', default=None, help='Load given model weights')
+    parser.add_argument('--pre_trained', default=None, help='Load given model weights')
     parser.add_argument('--tar_pre_trained', default=None, help='Load given model weights for target model')
 
     # Transformer specific parameters
@@ -89,10 +85,12 @@ def main():
     if args.attack_type in ['fgsm', 'rfgsm']:
         args.iters = 1 # single step attacks
 
+    print("pre_train: ", args.pre_trained)
+
     if args.variation == '':
-        args.dir = f"results_adv/{args.attack_type}/{args.src_model_3}_{args.index}_{args.data_type}/{args.tar_model}"
+        args.dir = f"results_adv/{args.attack_type}/{args.src_model}_{args.index}_{args.data_type}/{args.tar_model}"
     else:
-        args.dir = f"results_adv/{args.attack_type}/{args.src_model_3}_{args.index}_{args.variation}_{args.data_type}/{args.tar_model}"
+        args.dir = f"results_adv/{args.attack_type}/{args.src_model}_{args.index}_{args.variation}_{args.data_type}/{args.tar_model}"
     if not os.path.isdir(args.dir):
         os.makedirs(args.dir)
     json.dump(vars(args), open(f"{args.dir}/config.json", "w"), indent=4)
@@ -110,34 +108,22 @@ def main():
     device1 = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     device2 = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
-    src_model_1, src_mean, src_std = get_model(args.src_model_1, args.num_classes, args, is_src=True)
-    src_model_2, src_mean, src_std = get_model(args.src_model_2, args.num_classes, args, is_src=True)
-    src_model_3, src_mean, src_std = get_model(args.src_model_3, args.num_classes, args, is_src=True)
+    src_model, src_mean, src_std = get_model(args.src_model, args.num_classes, args, is_src=True)
+    if args.num_gpus > 1:
+        src_model = src_model.module
     
     device = device1
-    src_model_1 = src_model_1.to(device).eval()
-    src_model_2 = src_model_2.to(device).eval()
-    src_model_3 = src_model_3.to(device).eval()
-    if args.pre_trained_1:
-        checkpoint_1 = torch.load(args.pre_trained_1)
-        checkpoint_2 = torch.load(args.pre_trained_2)
-        checkpoint_3 = torch.load(args.pre_trained_3)
-        if 'model' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['model'])
-            src_model_2.load_state_dict(checkpoint_2['model'])
-            src_model_3.load_state_dict(checkpoint_3['model'])
-        elif 'state_dict' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['state_dict'])
-            src_model_2.load_state_dict(checkpoint_2['state_dict'])
-            src_model_3.load_state_dict(checkpoint_3['state_dict'])
-        elif 'model_state' in checkpoint_1:
-            src_model_1.load_state_dict(checkpoint_1['model_state'])
-            src_model_2.load_state_dict(checkpoint_2['model_state'])
-            src_model_3.load_state_dict(checkpoint_3['model_state'], strict=False)
+    src_model = src_model.to(device).eval()
+    if args.pre_trained:
+        checkpoint = torch.load(args.pre_trained)
+        if 'model' in checkpoint:
+            src_model.load_state_dict(checkpoint['model'])
+        elif 'state_dict' in checkpoint:
+            src_model.load_state_dict(checkpoint['state_dict'])
+        elif 'model_state' in checkpoint:
+            src_model.load_state_dict(checkpoint['model_state'])
         else:
-            src_model_1.load_state_dict(checkpoint_1)
-            src_model_2.load_state_dict(checkpoint_2)
-            src_model_3.load_state_dict(checkpoint_3)
+            src_model.load_state_dict(checkpoint)
 
     tar_model, tar_mean, tar_std = get_model(args.tar_model, args.num_classes, args)
 
@@ -198,7 +184,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         adv_test_meter = TestMeter(
             len(test_loader.dataset)
@@ -208,7 +194,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         fool_test_meter = CompareMeter(
             len(test_loader.dataset)
@@ -217,7 +203,7 @@ def main():
             args.num_classes,
             len(test_loader),
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
         tar_test_meter = TestMeter(
             len(test_loader.dataset)
@@ -227,7 +213,7 @@ def main():
             len(test_loader),
             False,
             "sum",
-            src_model_1.depth,
+            src_model.depth,
         )
 
     else:
@@ -319,29 +305,16 @@ def main():
                 target = torch.LongTensor(img.size(0))
                 target.fill_(args.target_label)
                 target = target.to(device)
-           
+
             if args.num_div_gpus > 1:
                 img, label = img.to(device1), label.to(device1)
                 if target is not None:
                     target = target.to(device1)
-            
-            def forward_pass(input, return_tokens=True):
-                out_1, feat_1 = src_model_1(input, return_tokens=return_tokens)
-                out_2, feat_2 = src_model_2(input, return_tokens=return_tokens)
-                out_3, feat_3 = src_model_3(input, return_tokens=return_tokens)
-
-                out = [0,0]
-                feat = [0,0]
-                for i in range(2):
-                    out[i] = [o_1 + o_2 + o_3 for o_1, o_2, o_3 in zip(out_1[i], out_2[i], out_3[i])]
-                    feat[i] = [f_1 + f_2 + f_3 for f_1, f_2, f_3 in zip(feat_1[i], feat_2[i], feat_3[i])]
-
-                return tuple(out), tuple(feat)
-
             if multi_data:
-                adv = Adv_Attack(args.attack_type)(forward_pass, src_mean, src_std, img.permute(0,2,1,3,4).to(device), label, target, args, True)
+                adv = Adv_Attack(args.attack_type)(src_model, src_mean, src_std, img.permute(0,2,1,3,4).to(device), label, target, args, True)
+        
             else:
-                adv = Adv_Attack(args.attack_type)(forward_pass, src_mean, src_std, img, label, target, args, video_data)
+                adv = Adv_Attack(args.attack_type)(src_model, src_mean, src_std, img, label, target, args, video_data)
 
             if 'clip' in args.tar_model:
                 image_features = tar_model.encode_image(normalize(adv.clone(), mean=src_mean, std=src_std))

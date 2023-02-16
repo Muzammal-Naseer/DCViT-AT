@@ -3,7 +3,7 @@ import torch.nn as nn
 from functools import partial
 import torch.nn.functional as F
 
-from timesformer.models.vit_utils import trunc_normal_
+from imtt.models.vit_utils import trunc_normal_
 
 from .build import MODEL_REGISTRY
 from torch import einsum

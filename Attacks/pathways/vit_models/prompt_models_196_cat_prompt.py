@@ -3,7 +3,7 @@ import torch.nn as nn
 from functools import partial
 import torch.nn.functional as F
 
-from timesformer.models.vit_utils import trunc_normal_
+from imtt.models.vit_utils import trunc_normal_
 
 from .build import MODEL_REGISTRY
 from torch import einsum
@@ -49,9 +49,6 @@ class resPromptVisionTransformer(Images_VIT):
 
         ## new parameters for the prompt model
         self.transformation = Block(dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[0], norm_layer=norm_layer,attention_type=self.attention_type)
-        # self.transformation = nn.Sequential(*[
-        #     Block(dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[0], norm_layer=norm_layer,attention_type=self.attention_type)
-        #     for i in range(4)])
         self.resPrompt_token = nn.Parameter(torch.zeros(1, self.num_prompts, self.embed_dim))
         self.head_resPrompt = nn.Linear(self.embed_dim, num_classes) if num_classes > 0 else nn.Identity()
 
@@ -105,10 +102,6 @@ class resPromptVisionTransformer(Images_VIT):
         ## transformation if the input is a video
         if not is_image:
             x = rearrange(x[:,:,:], '(b t) n m -> b (n t) m',t=T)
-            # if isinstance(self.transformation, nn.Sequential):
-            #     for block in self.transformation:
-            #         transformation = block(x[:,:,:],B,T,W,is_cls=False)
-            # else:
             transformation = self.transformation(x[:,:,:],B,T,W,is_cls=False)
             transformation = rearrange(transformation, 'b (n t) m -> b t n m',t=T).mean(dim=2)
             x = rearrange(x[:,:,:], 'b (n t) m -> b t n m',t=T)
@@ -148,7 +141,6 @@ class resPromptVisionTransformer(Images_VIT):
         if is_image:
             return x, layer_wise_tokens, attention_maps
         return (x_resPrompt, x_cls_prompt), ([self.head(xi[:,(T + self.num_prompts)]) for xi in layer_wise_tokens_norm], [self.head(xi[:, 0:(T + self.num_prompts)].mean(dim=1)) for xi in layer_wise_tokens_norm]), attention_maps  # , x
-        # return x_resPrompt, [xi[:, (T + self.num_prompts)] for xi in layer_wise_tokens_norm], attention_maps  # , x
 
 class resPromptDino(Images_VIT):
     def __init__(self, *args,actual_num_classes=400,qk_scale=None, num_prompts=1, num_frames=8, img_size=224, attention_type='divided_space_time', **kwargs):
@@ -267,21 +259,14 @@ class resPromptDino(Images_VIT):
             attention_maps.append(attn)
 
         x = self.norm(x)
-        # return x[:, 0:(T + self.num_prompts)], x[:, T + self.num_prompts], x[:, (T + self.num_prompts+1):], x[:,0], x[:,1:], is_image
         return layer_wise_tokens, attention_maps, is_image, T
 
     def forward(self, x, all_tokens=True):
         size = x.size(0)
 
-        # x_resPrompt, x_cls, x_patches, x_img_cls, x_img_patches, is_image = self.forward_features(x)
         layer_wise_tokens, attention_maps, is_image, T = self.forward_features(x)
         layer_wise_tokens_norm = [self.norm(x) for x in layer_wise_tokens]
 
-        # if is_image:
-        #     x_cls = torch.cat((x_img_cls.unsqueeze(-1), torch.mean(x_img_patches, dim=1).unsqueeze(-1)), dim=-1)
-        #     x_cls = x_cls.reshape(size, -1)
-        #     x_cls = self.linear(x_cls)
-        #     return x_cls, x_resPrompt
         x_cls = [x[:, T + self.num_prompts] for x in layer_wise_tokens_norm]
         x_patches = [x[:, (T + self.num_prompts+1):] for x in layer_wise_tokens_norm]
         x_resPrompt = [x[:, 0:(T + self.num_prompts)].mean(dim=1) for x in layer_wise_tokens_norm]
@@ -346,14 +331,6 @@ class resPromptClip(nn.Module):
         # transform = transform.mean(dim=1, keepdim=True)
         x = rearrange(x[:,:,:], 'b (n t) m -> b t n m',t=T)
         
-        ## Sample a random frame from the video only if training mode
-        # if self.training:
-        #     frame_ind = torch.randint(0, T, (B,))
-        #     x = x[torch.arange(B), frame_ind]
-        
-        # ## testing should be deterministic so we take the first frame
-        # else:
-        #     x = x[:,0,:,:]
         x = x[:, T//2, :, :]
 
         x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # shape = [*, grid ** 2 + 1, width]
