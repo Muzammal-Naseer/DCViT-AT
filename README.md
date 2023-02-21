@@ -278,7 +278,7 @@ Three types of attacks have been presented in our paper.
 2) Ensemble attack
 3) Cross Task attack
 
-Each attack can be run using the corresponding bash file under the [scripts](/Dynamic_Cues/Attacks/run_attacks) folder. For example, the simple black box attack is run using the following command:
+Each attack can be run using the corresponding bash file under the [scripts](/Attacks/run_attacks) folder. For example, the simple black box attack is run using the following command:
 ```
 evaluation() {
   python eval_adv_base.py \
