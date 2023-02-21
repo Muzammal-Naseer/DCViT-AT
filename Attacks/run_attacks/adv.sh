@@ -1,7 +1,7 @@
 #!/bin/bash
 
 evaluation() {
-  python eval_adv_base.py \
+  python eval_adv.py \
     --test_dir "path/to/annotation/file" \ # path to the annotation file
     --data_type "$1" \ # dataset name
     --src_model "$2" \ # source model name
