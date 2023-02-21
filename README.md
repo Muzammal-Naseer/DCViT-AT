@@ -310,7 +310,7 @@ for ATTACK in 'dim' 'mifgsm' 'pgd' 'fgsm'; do
   evaluation 'ucf101' "deit_base_patch16_224_timeP_1_cat" "resnet_50"  "" "$ATTACK" -1 20 70 "all" "path/to/source/model" "path/to/target/model"
 done
 ```
-After adding relevant path names to the arguments, run the command ``` bash Attacks/run_attacks/adv.sh ```.
+After adding relevant path names to the arguments, run the command ``` bash /Attacks/run_attacks/adv.sh ```.
 <hr>
 
 ## References
