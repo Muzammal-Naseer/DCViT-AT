@@ -38,16 +38,17 @@
 ## Contents
 
 1. [News](#News)
-2. [Setup](#Setup)
 2. [Model Zoo](#Model-Zoo)
    * [Pre-trained Image Models-Supervised](#Pre-trained-Image-Models-Supervised)
    * [Pre-trained Image Models-Self Supervised](#Pre-trained-Image-Models-Self-Supervised)
    * [Pre-trained Image-Language Models-Text Supervised](#Pre-trained-Image-Language-Models-Text-Supervised)
-3. [Training for Dynamic Cues for Videos](#Training-for-Dynamic-Cues-for-Videos)
-4. [Training for Dynamic Cues for Multi-Views-ModelNet40](#Training-for-Dynamic-Cues-for-Multi-Views-ModelNet40)
-5. [Evaluation](#Evaluation)
-6. [Attack Image2Videos](#Attack-Image2Videos)
-7. [References](#References)
+
+3. [Setup](#Setup)
+4. [Training for Dynamic Cues for Videos](#Training-for-Dynamic-Cues-for-Videos)
+5. [Training for Dynamic Cues for Multi-Views-ModelNet40](#Training-for-Dynamic-Cues-for-Multi-Views-ModelNet40)
+6. [Evaluation](#Evaluation)
+7. [Attack Image2Videos](#Attack-Image2Videos)
+8. [References](#References)
 
 <hr>
 
@@ -95,10 +96,6 @@
     * ```DeiT-base``` - 90.1
     * ```Dino``` - 90.1
     * ```Clip``` - 89.5
-<hr>
-
-## Setup
-
 <hr>
 
 ## Model Zoo
@@ -238,7 +235,53 @@ Get the top-1 and top-5 accuracies by running the command:
 <hr>
 
 ## Attack Image2Videos
+Four types of models are used as the target model - Timesformer, Resnet50, MVCNN, I3D. We provide pretrained models that can be directly used to evaluate the performance of attacks.
 
+### Target Model Zoo
+Timesformer, Resnet50, and I3D are trained on input size 8x224x224. Mvcnn are trained on 12x224x224.
+#### _Timesformer_
+* Divided Space Time Attention is used to train these models.
+
+
+| Dataset       | Pretrained Weights   |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
+|    Kinetics-400    | [Link]()  |
+|    Hmdb-51    | [Link]()  |
+|    Ucf-101    | [Link]()  |
+|    SSv2    | [Link]()  |
+
+#### _Resnet50_
+| Dataset       | Pretrained Weights   |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
+|    Kinetics-400    | [Link]()  |
+|    Hmdb-51    | [Link]()  |
+|    Ucf-101    | [Link]()  |
+|    SSv2    | [Link]()  |
+
+#### _I3D_
+| Dataset       | Pretrained Weights   |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
+|    Kinetics-400    | [Link]()  |
+|    Hmdb-51    | [Link]()  |
+|    Ucf-101    | [Link]()  |
+|    SSv2    | [Link]()  |
+
+#### _MVCNN_
+| Dataset       | Pretrained Weights   |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
+|    Shaded   | [Link]()  |
+|    Depth    | [Link]()  |
+
+### Running the Attacks
+Three types of attacks have been presented in our paper. 
+1) Simple Black-box attack
+2) Ensemble attack
+3) Cross Task attack
+
+Each attack can be run using the corresponding bash file under the [scripts](/Dynamic_Cues/Attacks/run_attacks) folder. For example, the simple black box attack is run using the following command:
+```
+
+```
 <hr>
 
 ## References
