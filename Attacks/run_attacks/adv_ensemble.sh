@@ -2,7 +2,7 @@
 
 evaluation() {
   python eval_ens.py \
-    --test_dir "../../../data/drive_2/hmdb51" \ # path to the annotation file
+    --test_dir "path/to/annotation/file" \ # path to the annotation file
     --data_type "$1" \ # dataset name
     --src_model_1 "$2" \ # source model 1 name
     --tar_model "$3" \ # target model name
@@ -24,10 +24,9 @@ evaluation() {
     --num_frames 8 \ # number of frames in the input of the target model
     --num_gpus 1 \ # number of GPUs - currently only 1 is supported
     --src_frames 8 \ # number of frames in the input of the source model
-    --eps 70 \ # epsilon (should be 16 for IN and 70 for videos because of normalization)
     --num_div_gpus 1 \ 
     --add_grad True \ # add the gradient of the main frame to all other frames
     --variation "ens" 
 }
 
-evaluation 'hmdb51' "deit_base_patch16_224_timeP_1_cat" "resnet_50" "" "dim" -1 20 16 "all" "path/to/source/model1" "path/to/target/model" "deit_small_patch16_224_timeP_1" "deit_tiny_patch16_224_timeP_1" "path/to/source/model2" "path/to/source/model3"
+evaluation 'hmdb51' "deit_base_patch16_224_timeP_1_cat" "resnet_50" "" "dim" -1 20 70 "all" "path/to/source/model1" "path/to/target/model" "deit_small_patch16_224_timeP_1" "deit_tiny_patch16_224_timeP_1" "path/to/source/model2" "path/to/source/model3"
