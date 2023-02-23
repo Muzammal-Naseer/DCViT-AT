@@ -35,6 +35,19 @@
 #
 <hr>
 
+## Citation
+If you find our work, this repository, or pretrained image models with temporal prompts useful, please consider giving a star :star: and citation.
+```bibtex
+@inproceedings{
+naseer2023boosting,
+title={Boosting Adversarial Transferability using Dynamic Cues},
+author={Muzammal Naseer and Ahmad Mahmood and Salman Khan and Fahad Khan},
+booktitle={The Eleventh International Conference on Learning Representations },
+year={2023},
+url={https://openreview.net/forum?id=SZynfVLGd5}
+}
+```
+
 ## Contents
 
 1. [News](#News)
