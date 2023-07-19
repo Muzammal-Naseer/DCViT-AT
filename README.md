@@ -327,5 +327,4 @@ After adding relevant path names to the arguments, run the command ``` bash Atta
 <hr>
 
 ## References
-
-<hr>
+Our code is based on [Deit](https://github.com/facebookresearch/deit), [TimeSformer](https://github.com/facebookresearch/TimeSformerP) and [DINO](https://github.com/facebookresearch/dino) repositories. We thank the authors for releasing their code.
