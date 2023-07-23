@@ -282,8 +282,8 @@ Timesformer, Resnet50, and I3D are trained on input size 8x224x224. Mvcnn are tr
 #### _MVCNN_
 | Dataset       | Pretrained Weights   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
-|    Shaded   | [Link]()  |
-|    Depth    | [Link]()  |
+|    Shaded   | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ESpIGYPz2flBkXJGZ4SvxNgBrjAoX2pnTGe4vFa_TxI_hA?e=4niusD)  |
+|    Depth    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EU2sh1HlV2lAiKDy3kLCAssBUYnJPSD0CNIp-GIfK3nMjQ?e=rehdm9)  |
 
 ### Running the Attacks
 Three types of attacks have been presented in our paper. 
