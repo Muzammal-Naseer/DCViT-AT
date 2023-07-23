@@ -258,26 +258,26 @@ Timesformer, Resnet50, and I3D are trained on input size 8x224x224. Mvcnn are tr
 
 | Dataset       | Pretrained Weights   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
-|    Kinetics-400    | [Link]()  |
-|    Hmdb-51    | [Link]()  |
-|    Ucf-101    | [Link]()  |
-|    SSv2    | [Link]()  |
+|    Kinetics-400    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ee96YN36pRZForHUUJD51kIB5zJiuoeGOqL1hvu4Eqf3oA?e=hhSy7b)  |
+|    Hmdb-51    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Eas7k6gvt2FPpOJyHW83P1oBCZwarHy7qjMXkmHq36aLBA?e=yPYuBJ)  |
+|    Ucf-101    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EcYS0V2YP3ZCo9JzSpT3FUQBTLSI-tCQ0OPGZDhGnGJkiA?e=TfRJgL)  |
+|    SSv2    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EdPZxOEwJslHhRo7pTB-BsEBfZ25dksb7fZLD1X082QLog?e=G4C4ND)  |
 
 #### _Resnet50_
 | Dataset       | Pretrained Weights   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
-|    Kinetics-400    | [Link]()  |
-|    Hmdb-51    | [Link]()  |
-|    Ucf-101    | [Link]()  |
-|    SSv2    | [Link]()  |
+|    Kinetics-400    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ee7-4iuejtRAiT88Ft6dlosBGs82Sb3rKGA3OuZul2P1Pw?e=bbLWvR)  |
+|    Hmdb-51    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ET_raiEgsk5Ihdll9lUWSQsBKq5_yzNjdk45yEdAIoq2OA?e=BbxTwm)  |
+|    Ucf-101    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Edt1JiKcL25Ng1j2GosgEa4BXbi3X0WIw_eWsVzkUdKYZg?e=EOL5xE)  |
+|    SSv2    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Edy0LmGStLtKso0eFjxnu08B9jORE20wZFrNYsHU3P_rIw?e=bzvvIH)  |
 
 #### _I3D_
 | Dataset       | Pretrained Weights   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------:|
-|    Kinetics-400    | [Link]()  |
-|    Hmdb-51    | [Link]()  |
-|    Ucf-101    | [Link]()  |
-|    SSv2    | [Link]()  |
+|    Kinetics-400    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EY9wjB4ji7dPhcO4B13UmbUBDdZtkBG1ehiQAMTi-mQZmA?e=kAEJaM)  |
+|    Hmdb-51    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ERixIIvsI-1Dn6GzbpZP01cBt4QrwybbNpTy4-EOptYOlw?e=CQVYpg)  |
+|    Ucf-101    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ecp_L5cKLuNLs5ao2kbrQo8B0hrliVc1-kLlYNZnV3BChg?e=nwg7fS)  |
+|    SSv2    | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EYuNY5ngfapHhBe6XNumajUBzPY90o-g87_wpoZGEZQYDw?e=mfJjOI)  |
 
 #### _MVCNN_
 | Dataset       | Pretrained Weights   |
