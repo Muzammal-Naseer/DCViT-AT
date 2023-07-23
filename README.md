@@ -118,16 +118,16 @@ url={https://openreview.net/forum?id=SZynfVLGd5}
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
 |    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
-|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
-|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ES2UNy5M5dNDjm83VoLTg80BuSLKWuSMQPXfn61k9tPDpw?e=fWSveg)  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EWrBxXHUAyxNtTXJ1-7yG7MBEvEA0e7zrIgeRcNyE2phqQ?e=ZLET9g)  |
 |    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
 |    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
-|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
-|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EaHIsp0w3uhNm93NLdJxNW4B1nOHuX1dbtqNegj7wuIpgA?e=Lq3umH)  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ef6x5dJi_yxPsBJFB7YgAbQBqXcAeoYX4ROZ6kfWmHnKXg?e=T6HYJg)  |
 |    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
 |    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
-|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
-|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EYNXafkuhHxGoY3Ni5QKhg0BvU9SV9iZQeYW4Elz-7jKxg?e=TuGkQL)  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EeUDYxVTxqFBuP8bORPyDq8Bk3t9z-m9U41Uz6Hdrv6HxQ?e=n5Jp0Y)  |
 |    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
 
 
@@ -135,18 +135,18 @@ url={https://openreview.net/forum?id=SZynfVLGd5}
 
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Dino | [Link]()  |
-|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
-|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
-|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Dino  | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Dino | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EbUDvMjJLbpFm6ol0dz-50MBQVexWdMGlgQJrLsjVRPrCw?e=GNcH0A)  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Dino  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ET3IuaTiLORPm_Nsv3BfuIwBZoDkFnKtCXK_uLZLbCIYWA?e=x4McbC)  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Dino  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ESnv3dAQb-1Gr16GPCUSwBUBKK1yyn_qG8e-KHDQRvlIow?e=Wt7PG1)  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Dino  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Eb_YTZ6XnixLo59QqU39GMUBh1xn8XWMPqy5PyBIwZYsqw?e=XFb01V)  |
 
 ### Pre-trained Image-Language Models-Text Supervised
 
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
 |    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Clip | [Link]()  |
-|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
-|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
+|    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Clip  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EWFJuWYdyJJOrLSOOiAqohoBv5NeVrykugwNbpdvhPQLNQ?e=ZsD8Iq)  |
+|    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Clip  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ee8uTaSobRVHjYFAyOgdcQsBBulEwTR4cN9CQ4HiXbBXwQ?e=ED8cg7)  |
 |    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
 
 <hr>
