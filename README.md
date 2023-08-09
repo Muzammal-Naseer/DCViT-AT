@@ -162,7 +162,7 @@ conda activate [name]
 python setup.py build develop
 ```
 ## Dataset Preparation
-See details in md file
+See details in md files
 
 ## Training for Dynamic Cues for Videos
 The folder [Dynamic_Cues](/Dynamic_Cues) contains all the code to train our models.
