@@ -117,18 +117,18 @@ url={https://openreview.net/forum?id=SZynfVLGd5}
 
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ERMyvmFt7QNEqJtnlwEnrgoBIFjrby1JG8f7K9T9nfPWhA?e=6OJZ6z)  |
 |    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ES2UNy5M5dNDjm83VoLTg80BuSLKWuSMQPXfn61k9tPDpw?e=fWSveg)  |
 |    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EWrBxXHUAyxNtTXJ1-7yG7MBEvEA0e7zrIgeRcNyE2phqQ?e=ZLET9g)  |
-|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link]()  |
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-tiny  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Edd5W5YKdnNAi48OiJfsHs4BVkW_qQNGmp6f3miJYD0NNA?e=kggLx1)  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ebw2OBJmUs1DggzQeIxtOJUBHmuaTmbGIcd2BuEzo-YAhQ?e=hHlhmc)  |
 |    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EaHIsp0w3uhNm93NLdJxNW4B1nOHuX1dbtqNegj7wuIpgA?e=Lq3umH)  |
 |    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ef6x5dJi_yxPsBJFB7YgAbQBqXcAeoYX4ROZ6kfWmHnKXg?e=T6HYJg)  |
-|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link]()  |
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-small  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EVdZ2FAczLNPuVw-qVsyiqwBbm-9POoPIeLMHurHZdIbFA?e=OaRTa6)  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ETHuMvnGTUFJs8EWsuM4CjYBW8PwipOa4tng-mo6KY82ug?e=zHeNNe)  |
 |    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EYNXafkuhHxGoY3Ni5QKhg0BvU9SV9iZQeYW4Elz-7jKxg?e=TuGkQL)  |
 |    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EeUDYxVTxqFBuP8bORPyDq8Bk3t9z-m9U41Uz6Hdrv6HxQ?e=n5Jp0Y)  |
-|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  DeiT-base  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/ERHonHqomC5Ci31djOd7Af4BhACNlpww8lk0g7qfE96GLg?e=Ij2MMQ)  |
 
 
 ### Pre-trained Image Models-Self Supervised
@@ -144,10 +144,10 @@ url={https://openreview.net/forum?id=SZynfVLGd5}
 
 | Dataset       | Input Size | Model | Pretrained Weights   |
 |:--------------|:----------:|:-----:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Clip | [Link]()  |
+|    ImageNet & Kinetics-400    |   224 x 224 & 8x224x224     |  Clip | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EeYKoiEMyDdLn6FNRqG0V14BwaNKc1RihnQuz6yHmu8cJw?e=iSO9lF)  |
 |    ImageNet & Hmdb-51    |   224 x 224 & 8x224x224     |  Clip  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EWFJuWYdyJJOrLSOOiAqohoBv5NeVrykugwNbpdvhPQLNQ?e=ZsD8Iq)  |
 |    ImageNet & Ucf-101    |   224 x 224 & 8x224x224     |  Clip  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/Ee8uTaSobRVHjYFAyOgdcQsBBulEwTR4cN9CQ4HiXbBXwQ?e=ED8cg7)  |
-|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Clip  | [Link]()  |
+|    ImageNet & Ssv2    |   224 x 224 & 8x224x224     |  Clip  | [Link](https://pern-my.sharepoint.com/:u:/g/personal/23100146_lums_edu_pk/EZXtR44sN31Nmtm_APcJhuoBAcXlGjfpwphr5lGwW3kNTg?e=cjwxpN)  |
 
 <hr>
 
